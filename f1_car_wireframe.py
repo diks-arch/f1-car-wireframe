@@ -11,31 +11,31 @@ class F1CarWireframe(ShowBase):
 
         self.car = self.render.attachNewNode("F1_Car")
 
-        # 🏎️ MAIN BODY
+        #MAIN BODY
         self.add_part(0, 0, 0.5, (7, 1.2, 0.4))
         self.add_part(3.5, 0, 0.3, (2.5, 0.6, 0.25))
         self.add_part(-0.5, 0, 1.0, (1.5, 0.8, 0.6))
 
-        # 🟦 FRONT WING (connected)
+        #FRONT WING 
         self.add_part(5.5, 0, 0.2, (0.3, 3.5, 0.1))  # main plate
 
-        # supports (NEW)
+        #supports
         self.add_part(4.8, 0.6, 0.3, (0.2, 0.2, 0.4))
         self.add_part(4.8, -0.6, 0.3, (0.2, 0.2, 0.4))
 
-        # 🟥 REAR WING (connected)
+        #REAR WING
         self.add_part(-3.5, 0, 1.5, (0.3, 2.5, 0.1))
         self.add_part(-3.5, 0, 1.9, (0.3, 2.5, 0.1))
 
-        # pillars (NEW)
+        #pillars
         self.add_part(-3.2, 0.6, 1.2, (0.2, 0.2, 0.6))
         self.add_part(-3.2, -0.6, 1.2, (0.2, 0.2, 0.6))
 
-        # side pods
+        #side pods
         self.add_part(0.5, 1.2, 0.6, (2.5, 0.5, 0.3))
         self.add_part(0.5, -1.2, 0.6, (2.5, 0.5, 0.3))
 
-        # 🛞 Wheels
+        #Wheels
         wheel_positions = [
             (2.5, 1.5), (2.5, -1.5),
             (-2.5, 1.5), (-2.5, -1.5)
@@ -44,14 +44,14 @@ class F1CarWireframe(ShowBase):
         for x, y in wheel_positions:
             self.add_wheel(x, y, 0.4)
 
-        # 🎥 Camera
+        #Camera
         self.angle = 0
         self.radius = 30
         self.height = 8
 
         self.taskMgr.add(self.rotate_camera, "RotateCamera")
 
-    # 🔷 Parts
+    #Parts
     def add_part(self, x, y, z, scale):
         part = self.loader.loadModel("models/misc/rgbCube")
         part.reparentTo(self.car)
@@ -60,7 +60,7 @@ class F1CarWireframe(ShowBase):
         part.setRenderModeWireframe()
         part.setColor(Vec4(1, 1, 1, 1))
 
-    # 🔷 Wheels
+    #Wheels
     def add_wheel(self, x, y, z):
         wheel = self.loader.loadModel("models/misc/sphere")
         wheel.reparentTo(self.car)
@@ -69,7 +69,7 @@ class F1CarWireframe(ShowBase):
         wheel.setRenderModeWireframe()
         wheel.setColor(Vec4(1, 1, 1, 1))
 
-    # 💡 Lights
+    #Lights
     def setup_lights(self):
         alight = AmbientLight('alight')
         alight.setColor(Vec4(0.2, 0.2, 0.2, 1))
@@ -81,7 +81,7 @@ class F1CarWireframe(ShowBase):
         dlnp.setHpr(45, -45, 0)
         self.render.setLight(dlnp)
 
-    # 🎥 Camera rotation
+    #Camera rotation
     def rotate_camera(self, task):
         self.angle += 0.01
 
